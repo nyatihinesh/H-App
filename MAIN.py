@@ -1034,57 +1034,6 @@ def swg():
 
     root.call('wm', 'attributes', '.', '-topmost', '1')
     root.mainloop()
-def fingerCounter():
-    # OpenCV Function
-    
-    # Creating A Function Which Counts The Number Of Fingers Via A Deep Computer Vision Model and Displaying An Image Corresponding To The Fingers
-    cap=cv.VideoCapture(0)
-    detector=HandDetector(maxHands=1)
-    folderPath="fingerImages"
-    mylist=listdir(folderPath)
-    overlaylist=[]
-    for file in mylist:
-        image=cv.imread(f"{folderPath}/{file}")
-        overlaylist.append(image)
-    text=None
-    # While Loop Starts
-    while True:
-        success,img=cap.read()
-        image=overlaylist[0]
-        img=cv.flip(img,1)
-        img=detector.findHands(img,False)
-        lmlist=detector.findHands(img)
-        cv.rectangle(img,(5,250),(205,450),(0,255,0),cv.FILLED)
-        
-        if len(lmlist) != 0:
-            fingers=detector.fingersUp()
-            totalFingers=fingers.count(1)
-            if totalFingers == 0:
-                image=overlaylist[5]
-                text=0
-            if totalFingers == 1:
-                image=overlaylist[0]
-                text=1
-            if totalFingers == 2:
-                image=overlaylist[1]
-                text=2
-            if totalFingers == 3:
-                image=overlaylist[2]
-                text=3
-            if totalFingers == 4:
-                image=overlaylist[3]
-                text=4
-            if totalFingers == 5:
-                image=overlaylist[4]
-                text=5
-            cv.putText(img,str(text),(40,400),cv.FONT_HERSHEY_COMPLEX,5,(0,0,255),15)
-            img[0:200,0:200]=image
-            
-        cv.imshow("Deep Computer Vision Finger Counter",img)
-        if cv.waitKey(20) & 0xFF == ord('q'):
-            break
-    cv.destroyAllWindows()
-
 def ntfn():
     root=Tk()
     root.title("H-ntfn | Desktop Notifier")
