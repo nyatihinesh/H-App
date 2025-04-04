@@ -41,9 +41,3 @@ Get H-App running on your machine in just a few steps:
 - Python 3.7.9
 - Tkinter 
 - Git (for cloning the repository)
-
-### Steps
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/nyatihinesh/H-App.git
-   cd H-App
